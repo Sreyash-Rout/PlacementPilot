@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import OptionsPage from "./components/OptionsPage";
 
 const App = () => {
-  const [backendData, setBackendData] = useState(null);
-
-  useEffect(() => {
-    fetch("/api")
-      .then(response => response.json())
-      .then(data => setBackendData(data))
-      .catch(error => console.error("Error fetching data:", error));
-  }, []);
-
   return (
-    <div>
-      {!backendData || !backendData.users ? (
-        <p>Loading....</p>
-      ) : (
-        backendData.users.map((user, i) => (
-          <p key={i}>{user}</p>
-        ))
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/options" element={<OptionsPage />} />
+      </Routes>
+    </Router>
   );
 };
 
 export default App;
+
