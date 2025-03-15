@@ -1,0 +1,148 @@
+/* Container for the entire experience section */
+.exp-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for the form */
+  .exp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .exp-form input,
+  .exp-form textarea,
+  .exp-form select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .exp-form input:focus,
+  .exp-form textarea:focus,
+  .exp-form select:focus {
+    border-color: #4CAF50;
+  }
+  
+  .submit-btn {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #45a049;
+  }
+  
+  /* Styling for review list */
+  .review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Styling for each review card */
+  .review-card {
+    padding: 16px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-card h3 {
+    margin-bottom: 10px;
+  }
+  
+  .review-card p {
+    margin-bottom: 8px;
+  }
+  
+  .review-card small {
+    color: #555;
+  }
+  
+  /* Styling for the delete button */
+  .delete-btn {
+    padding: 8px 12px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Styling for empty message */
+  .empty-msg {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+  }
+  .reply-section {
+    margin-top: 10px;
+  }
+  
+  .reply-card {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .reply-input {
+    padding: 5px;
+    margin-top: 5px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .highlight-tag {
+    color: #007bff;
+    font-weight: bold;
+  }
+  .search-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+  }
+  
+  .search-btn {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .search-btn:active {
+    background-color: #3e8e41;
+  }
+  

@@ -20,15 +20,12 @@ const features = [
     link: "/gaming", // Ensure navigation works
   },
   {
-    description: "Complete LLD & HLD for Interviews.",
-    image: "https://example.com/system-design.png",
-    comingSoon: true,
-  },
-  {
-    description: "Roadmaps to help you learn efficiently.",
-    image: "https://example.com/roadmap.png",
-    comingSoon: true,
-  },
+    description: "Share your experiences and explore detailed insights from others about interviews, company culture, and job roles. This platform helps you prepare better by learning from real stories and tips shared by people who've been there.",
+    image: "https://clipground.com/images/job-interview-clip-art-3.jpg",
+    comingSoon: false,
+    link:"/experiences"
+  }
+  
 ];
 
 const OptionsPage = () => {
@@ -43,7 +40,7 @@ const OptionsPage = () => {
           <div
             key={index}
             className="feature-card"
-            onClick={() => feature.link && navigate(feature.link)} // Fix navigation for all valid links
+            onClick={() => feature.link && navigate(feature.link)} 
           >
             {feature.comingSoon && <span className="coming-soon">Coming Soon</span>}
             <img src={feature.image} alt="Feature" className="feature-image" />
