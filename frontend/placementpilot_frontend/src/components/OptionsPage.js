@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./OptionsPage.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import ticTacToeImage from "../Images/tictactoe.png";
 
 
 const features = [
@@ -13,8 +14,8 @@ const features = [
     link: "/resume", 
   },
   {
-    description: "Video Solutions to LeetCode contest.",
-    image: "https://example.com/contest.png",
+    description: "Gamified Tic-Tac-Toe with quiz challenges! Answer correctly to make a move.",
+    image: ticTacToeImage,
     comingSoon: false,
     link: "/gaming", // Ensure navigation works
   },

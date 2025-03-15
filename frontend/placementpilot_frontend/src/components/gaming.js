@@ -22,10 +22,14 @@ const MultiplayerGaming = () => {
   const [socket, setSocket] = useState(null);
   const [playOnline, setPlayOnline] = useState(false);
 
-  // New states for question mechanism
+  // Question mechanism states:
   const [currentQuestion, setCurrentQuestion] = useState(null); // { question, options, correct }
   const [countdown, setCountdown] = useState(0);
   const [allowedToMove, setAllowedToMove] = useState(false);
+  const [questionLocked, setQuestionLocked] = useState(false); // Prevent further answer attempts if wrong
+  // Separate messages:
+  const [globalMessage, setGlobalMessage] = useState(""); // For correct–answer announcements (displayed on main interface)
+  const [questionMessage, setQuestionMessage] = useState(""); // For wrong answers/time–up (displayed in question overlay)
 
   const navigate = useNavigate();
 
@@ -36,7 +40,7 @@ const MultiplayerGaming = () => {
     };
   }, []);
 
-  // Winner checking (for board state)
+  // Winner checking
   const checkWinner = useCallback(() => {
     for (let row = 0; row < 3; row++) {
       if (
@@ -86,7 +90,8 @@ const MultiplayerGaming = () => {
       title: "Enter your name",
       input: "text",
       showCancelButton: true,
-      inputValidator: (value) => (value ? undefined : "You need to write something!"),
+      inputValidator: (value) =>
+        value ? undefined : "You need to write something!",
     });
     return result;
   };
@@ -116,31 +121,46 @@ const MultiplayerGaming = () => {
         setOpponentName(data.opponentName);
       });
 
-      // New question event from server
+      // New question event:
       socket.on("newQuestion", (data) => {
         console.log("New question received:", data);
         setCurrentQuestion(data.questionData);
         setCountdown(data.duration);
-        setAllowedToMove(false); // until question answered
+        setAllowedToMove(false);
+        setQuestionLocked(false);
+        setQuestionMessage(""); // Clear any prior question message
+        // Optionally clear the global message for a fresh start:
+        // setGlobalMessage("");
       });
 
-      // Question result: which player is allowed to move
+      // Wrong answer event: show message in question overlay
+      socket.on("wrongAnswer", (data) => {
+        setQuestionMessage(data.message);
+        setQuestionLocked(true);
+      });
+
+      // Question result event:
       socket.on("questionResult", (data) => {
         console.log("Question result received:", data);
-        if (data.allowedPlayerId === socket.id) {
-          setAllowedToMove(true);
+        setAllowedToMove(data.allowed);
+        // Check if the message indicates a correct answer.
+        if (data.allowed || (data.message && data.message.includes("answered correctly"))) {
+          // Correct answer: display message globally and clear the overlay on both ends.
+          setGlobalMessage(data.message);
+          setCurrentQuestion(null);
+          setCountdown(0);
         } else {
-          setAllowedToMove(false);
+          // For time-up or both-wrong, display the message in the question overlay.
+          setQuestionMessage(data.message || "");
+          // The overlay will be replaced by the next newQuestion event.
         }
-        setCurrentQuestion(null);
-        setCountdown(0);
       });
 
       return () => socket.disconnect();
     }
   }, [socket]);
 
-  // Countdown timer for question
+  // Countdown timer for questions
   useEffect(() => {
     if (currentQuestion && countdown > 0) {
       const timer = setInterval(() => {
@@ -167,17 +187,14 @@ const MultiplayerGaming = () => {
     setPlayOnline(true);
   };
 
-  // Handle answering the question
+  // Handle answering a question (only if not locked)
   const handleAnswer = (answer) => {
-    if (socket && currentQuestion) {
+    if (socket && currentQuestion && !questionLocked) {
       socket.emit("questionAnswer", { answer });
-      // Optionally, disable further answering until server responds
-      setCurrentQuestion(null);
-      setCountdown(0);
     }
   };
 
-  // Handle making a move (only allowed if allowedToMove is true)
+  // Handle making a move (only if allowed)
   const makeMove = (row, col) => {
     if (!socket || !allowedToMove || finishedState || gameState[row][col] !== "") return;
     socket.emit("makeMove", { row, col, player: playingAs });
@@ -207,23 +224,23 @@ const MultiplayerGaming = () => {
               </div>
             </div>
             <h1 className="game-heading">Tic Tac Toe</h1>
+
+            {/* Global message displayed on the main interface (for correct answers) */}
+            {globalMessage && <div className="global-message">{globalMessage}</div>}
+
             <div className="square-wrapper">
               {gameState.map((row, rowIndex) =>
                 row.map((cell, colIndex) => (
                   <Square
                     key={rowIndex * 3 + colIndex}
-                    playingAs={playingAs}
-                    gameState={gameState}
-                    socket={socket}
-                    finishedState={finishedState}
-                    // Use makeMove prop so Square just calls it
                     makeMove={() => makeMove(rowIndex, colIndex)}
-                    id={rowIndex * 3 + colIndex}
+                    finishedState={finishedState}
                     currentElement={cell}
                   />
                 ))
               )}
             </div>
+
             {finishedState && (
               <>
                 <h3 className="finished-state">
@@ -238,13 +255,16 @@ const MultiplayerGaming = () => {
                 </button>
               </>
             )}
+
+            {/* Question overlay (displays question and question message for wrong/time-up) */}
             {currentQuestion && (
               <div className="question-overlay">
                 <div className="question-box">
                   <h2>{currentQuestion.question}</h2>
+                  {questionMessage && <p className="question-message">{questionMessage}</p>}
                   <div className="options">
                     {currentQuestion.options.map((opt, idx) => (
-                      <button key={idx} onClick={() => handleAnswer(opt)}>
+                      <button key={idx} onClick={() => handleAnswer(opt)} disabled={questionLocked}>
                         {opt}
                       </button>
                     ))}
