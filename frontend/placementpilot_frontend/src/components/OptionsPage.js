@@ -4,6 +4,7 @@ import "./OptionsPage.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
+
 const features = [
   {
     description: "Get instant AI-powered feedback on your resume! Our system analyzes your resume, suggests improvements, and provides curated resources and videos to help you craft the perfect resume.",
@@ -14,7 +15,8 @@ const features = [
   {
     description: "Video Solutions to LeetCode contest.",
     image: "https://example.com/contest.png",
-    comingSoon: true,
+    comingSoon: false,
+    link: "/gaming", // Ensure navigation works
   },
   {
     description: "Complete LLD & HLD for Interviews.",
@@ -40,7 +42,7 @@ const OptionsPage = () => {
           <div
             key={index}
             className="feature-card"
-            onClick={() => index === 0 && navigate("/resume")} 
+            onClick={() => feature.link && navigate(feature.link)} // Fix navigation for all valid links
           >
             {feature.comingSoon && <span className="coming-soon">Coming Soon</span>}
             <img src={feature.image} alt="Feature" className="feature-image" />

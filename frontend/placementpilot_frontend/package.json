@@ -4,12 +4,14 @@
   "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
+    "axios": "^1.7.9",
     "cra-template": "1.2.0",
-    "framer-motion": "^12.4.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.5",
+    "react-router-dom": "^7.3.0",
     "react-scripts": "5.0.1",
+    "socket.io-client": "^4.8.1",
+    "sweetalert2": "^11.17.2",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
@@ -35,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
