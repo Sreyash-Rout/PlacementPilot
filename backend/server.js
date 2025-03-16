@@ -3,7 +3,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const mongoose = require("mongoose");
-
+require('dotenv').config();
 // Import the review routes and question bank
 const reviewRouter = require("./routes/reviewRoute");
 const { questionBank } = require("./data/questions.json");
@@ -232,7 +232,7 @@ function checkWinner(board) {
 
 // Connect to MongoDB then start the server
 mongoose
-  .connect("mongodb://localhost:27017/experienceDB", {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
