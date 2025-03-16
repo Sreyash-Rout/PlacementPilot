@@ -1,0 +1,208 @@
+/* Overall page container */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content area */
+.main-div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+  flex-direction: column;
+  font-family: 'Poppins';
+}
+
+/* Container for heading, move detection, board and question overlay */
+.water-background {
+  background-color: #b8cbdc; /* Light sky blue */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Game heading */
+.game-heading {
+  margin-top: 20px;
+  padding: 5px 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  background-color: #003366; /* Dark Blue */
+  font-family: 'Poppins';
+}
+
+/* Grid for 9 squares */
+.square-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  width: fit-content;
+  margin: 20px auto;
+}
+
+/* Basic square style */
+.square {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+  border: 2px solid #fff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Move detection container */
+.move-detection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+}
+
+/* Waiting screen styling */
+.waiting {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  font-size: 44px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
+  font-family: 'Poppins';
+}
+
+/* Play Online button */
+.playOnline {
+  font-weight: 700;
+  border: none;
+  background-color: #003366;
+  color: white;
+  font-size: 60px;
+  cursor: pointer;
+  margin-top: 40vh;
+  padding: 6px 10px;
+  border-radius: 5px;
+  outline: none;
+  font-family: 'Poppins';
+}
+
+/* Footer styling */
+.footer {
+  background-color: #001a44;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: auto;
+}
+
+/* Finished state message */
+.finished-state {
+  font-size: 25px;
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+  font-family: 'Poppins';
+}
+
+/* Move detection labels */
+.left,
+.right {
+  height: 30px;
+  width: 120px;
+  background-color: #4b495f;
+  border-bottom-left-radius: 50px;
+  border-top-right-radius: 50px;
+  padding-top: 3px;
+  color: white;
+  font-size: 18px;
+  padding-bottom: 5px;
+  text-align: center;
+  font-family: 'Poppins';
+}
+
+/* Highlight current move (example classes) */
+.current-move-cross {
+  background-color: #91bede !important;
+}
+
+.current-move-circle {
+  background-color: #dd7f9f !important;
+}
+
+/* Back to Options Page button */
+.back-to-OptionPage-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #003366;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.back-to-OptionPage-button:hover {
+  border-color: wheat;
+}
+
+/* Opponent info */
+.against {
+  color: white;
+  font-size: 25px;
+  margin-top: 20px;
+  font-family: 'Poppins';
+}
+
+/* Question overlay styles */
+.question-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.question-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.question-box h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.question-box .options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.question-box .options button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
