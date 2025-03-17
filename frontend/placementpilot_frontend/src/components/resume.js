@@ -61,9 +61,9 @@ const Dashboard = () => {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("/extract", formData, {
+      const response = await axios.post("http://localhost:5000/extract", formData, {
         headers: { "Content-Type": "multipart/form-data" },
-      });
+      });      
       const skillsText = response.data["Skills (Cleaned)"] || "";
       const newSkills = skillsText
         .replace(/\n/g, "")
@@ -94,9 +94,9 @@ const Dashboard = () => {
     formData.append("job_desc", jobDescription);
 
     try {
-      const response = await axios.post("/analyze", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post("http://localhost:5000/analyze", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });      
       const data = response.data;
       // Update current skills.
       const skillsText = data.cleanedSkills || "";
