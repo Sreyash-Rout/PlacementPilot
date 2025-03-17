@@ -1,4 +1,7 @@
 /* Container for the entire experience section */
+.backgroundcolor {
+  background-color: #00336a;
+}
 .exp-container {
     max-width: 800px;
     margin: 30px auto;

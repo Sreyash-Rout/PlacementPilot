@@ -117,7 +117,7 @@ export default function ExpList() {
   );
 
   return (
-    <div>
+    <div className="backgroundcolor">
       <Navbar />
       <div className="exp-container">
         <h2>Post Your Interview Experience</h2>
