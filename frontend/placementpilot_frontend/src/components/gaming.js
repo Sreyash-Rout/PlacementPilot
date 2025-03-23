@@ -181,7 +181,7 @@ const MultiplayerGaming = () => {
     if (!result.isConfirmed || !result.value) return;
 
     setPlayerName(result.value);
-    const newSocket = io("http://localhost:5000", { autoConnect: true });
+    const newSocket = io("http://localhost:5001", { autoConnect: true });
     newSocket.emit("request_to_play", { playerName: result.value });
     setSocket(newSocket);
     setPlayOnline(true);
