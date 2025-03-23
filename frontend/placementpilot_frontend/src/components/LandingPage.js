@@ -19,7 +19,7 @@ const LandingPage = () => {
             <div className="what-we-provide">
                 <h2>What We Provide</h2>
                 <p>
-                    PlacementPilot is your ultimate career companion, offering AI-driven job recommendations, expert interview preparation, and real-time placement insights. We help students and job seekers navigate the competitive job market with tailored resources, interactive mock tests, and a dynamic learning environment. Elevate your career with PlacementPilot today!
+                PlacementPilot is an innovative platform designed to revolutionize the placement journey by offering in-depth insights, AI-powered personalized recommendations, immersive gamified learning experiences, and real-world interview insights. Our goal is to empower job seekers with the right tools, knowledge, and skills to confidently navigate the recruitment process and secure their dream jobs.
                 </p>
             </div>
             <Footer/>
